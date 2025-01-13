@@ -1,0 +1,131 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Merriweather:wght@300;400;700;900&display=swap');
+
+/* Global styles with Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Imported Styles */
+@import 'react-toastify/dist/ReactToastify.css';
+
+@layer base {
+  :root {
+    /* Design System Color Variables */
+    --color-primary-50: #e6f2ff;
+    --color-primary-100: #b3dcff;
+    --color-primary-200: #80c6ff;
+    --color-primary-300: #4db0ff;
+    --color-primary-400: #1a80b6;
+    --color-primary-500: #0f5d8a;
+    --color-primary-600: #0a3c5c;
+
+    --color-secondary-50: #ffe6ed;
+    --color-secondary-100: #ffb3c6;
+    --color-secondary-200: #ff80a0;
+    --color-secondary-300: #ff4d7a;
+    --color-secondary-400: #fb3466;
+    --color-secondary-500: #d9214c;
+    --color-secondary-600: #8c1532;
+
+    --color-neutral-50: #f9fafb;
+    --color-neutral-100: #f3f4f6;
+    --color-neutral-200: #e5e7eb;
+    --color-neutral-300: #d1d5db;
+    --color-neutral-400: #9ca3af;
+    --color-neutral-500: #6b7280;
+    --color-neutral-600: #4b5563;
+    --color-neutral-700: #374151;
+    --color-neutral-800: #1f2937;
+    --color-neutral-900: #111827;
+
+    --color-background: #f4f7fa;
+    --color-text-dark: #1f2937;
+    --color-text-light: #4b5563;
+    --color-text-muted: #6b7280;
+  }
+
+  /* Base Styles */
+  body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--color-background);
+    color: var(--color-text-dark);
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', Georgia, serif;
+    color: var(--color-text-dark);
+    font-weight: 700;
+  }
+
+  /* Interactive Elements */
+  a, button {
+    transition: all 300ms ease-in-out;
+  }
+
+  input:focus, 
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(26, 128, 182, 0.5); /* Primary color focus ring */
+  }
+
+  /* Accessibility and Usability */
+  * {
+    @apply border-border;
+    scroll-behavior: smooth;
+  }
+}
+
+/* Existing utility classes and animations */
+.spinner {
+  border: 4px solid var(--color-neutral-100);
+  border-top: 4px solid var(--color-primary-400);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Quiz Option Styles */
+.quiz-option {
+  @apply w-full text-left p-4 rounded-xl border-2 transition-all cursor-pointer mb-2;
+}
+
+.quiz-option.selected {
+  @apply border-blue-500 bg-blue-50;
+}
+
+/* Review Mode Styles */
+.quiz-option.correct-selected {
+  @apply border-green-500 bg-green-50;
+}
+
+.quiz-option.incorrect-selected {
+  @apply border-red-500 bg-red-50;
+}
+
+.quiz-option.correct-unselected {
+  @apply border-green-500 opacity-50;
+}
+
+.correct-mark {
+  @apply text-green-500 font-bold ml-2;
+}
+
+.incorrect-mark {
+  @apply text-red-500 font-bold ml-2;
+}
+
+/* Disable pointer events in review mode */
+.review-mode .quiz-option {
+  @apply cursor-not-allowed;
+}

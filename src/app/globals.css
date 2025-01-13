@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Enhanced Color Palette */
+  --color-primary: #1a80b6;
+  --color-secondary: #fb3467;
+  --color-accent: #2ecc71;
+  --color-background: #f4f7f9;
+  --color-text-dark: #1f2937;
+  --color-text-light: #6b7280;
+  --color-border: #e5e7eb;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+
+  /* Professional Typography Scale */
+  --font-xs: 0.75rem;
+  --font-sm: 0.875rem;
+  --font-base: 1rem;
+  --font-md: 1.125rem;
+  --font-lg: 1.25rem;
+  --font-xl: 1.5rem;
+  --font-2xl: 2rem;
+  --font-3xl: 2.5rem;
+
+  /* Refined Spacing System */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Professional Shadows */
+  --shadow-sm: 0 1px 3px 0 var(--color-shadow);
+  --shadow-md: 0 4px 6px -1px var(--color-shadow), 0 2px 4px -1px var(--color-shadow);
+  --shadow-lg: 0 10px 15px -3px var(--color-shadow), 0 4px 6px -2px var(--color-shadow);
+
+  /* Refined Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Responsive Breakpoints */
+  --breakpoint-mobile: 640px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide: 1440px;
+}
+
+/* Modern CSS Reset with Enhanced Accessibility */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--color-text-dark);
+  background-color: var(--color-background);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Professional Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+h1 { 
+  font-size: clamp(var(--font-xl), 5vw, var(--font-3xl)); 
+  letter-spacing: -0.02em;
+}
+h2 { 
+  font-size: clamp(var(--font-lg), 4vw, var(--font-2xl)); 
+  letter-spacing: -0.01em;
+}
+h3 { font-size: clamp(var(--font-md), 3vw, var(--font-xl)); }
+h4 { font-size: clamp(var(--font-base), 2.5vw, var(--font-lg)); }
+h5 { font-size: clamp(var(--font-sm), 2vw, var(--font-md)); }
+h6 { font-size: clamp(var(--font-xs), 1.5vw, var(--font-sm)); }
+
+/* Refined Links and Interactive Elements */
+a, .btn {
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: 
+    color var(--transition-fast), 
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 0.5rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Professional Form Styling */
+input, 
+textarea, 
+select, 
+button {
+  appearance: none;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  font-size: var(--font-base);
+  transition: 
+    border-color var(--transition-fast), 
+    box-shadow var(--transition-fast);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(26, 128, 182, 0.1);
+}
+
+/* Responsive Images with Modern Styling */
+img, 
+picture, 
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0.75rem;
+  object-fit: cover;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+@media (hover: hover) {
+  img:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* Enhanced Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--color-background);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-border);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 10px;
+  transition: background-color var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-secondary);
+}
+
+/* Dark Mode with Refined Palette */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #111827;
+    --color-text-dark: #f9fafb;
+    --color-text-light: #9ca3af;
+    --color-border: #374151;
+    --color-shadow: rgba(255, 255, 255, 0.05);
+  }
+  
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-dark);
+  }
+}

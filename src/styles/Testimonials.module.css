@@ -1,0 +1,90 @@
+.hero {
+  text-align: center;
+  margin-top: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.reviewCard {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.name {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.rating {
+  color: #ffb400;
+  font-size: 1.1rem;
+}
+
+.platform {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.reviewText {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+/* Testimonials.module.css */
+
+.testimonialsHero {
+  text-align: center;
+  margin-top: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+.testimonialsReviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.testimonialCard {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.testimonialName {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.testimonialRating {
+  color: #ffb400;
+  font-size: 1.1rem;
+}
+
+.testimonialPlatform {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.testimonialText {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 1rem;
+  line-height: 1.5;
+}

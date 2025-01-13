@@ -1,0 +1,14 @@
+/* styles/instructorPage.module.css */
+.instructorInfo {
+  text-align: center;
+  margin: 20px;
+}
+
+.courseList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.courseItem {
+  margin: 10px 0;
+}

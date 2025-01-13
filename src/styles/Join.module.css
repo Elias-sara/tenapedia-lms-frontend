@@ -1,0 +1,51 @@
+/* Tailwind CSS classes or custom styles for consistency with Login */
+.text-blue-600 {
+  color: #3498db;
+}
+
+.text-red-500 {
+  color: #e74c3c;
+}
+
+.bg-blue-500 {
+  background-color: #3498db;
+}
+
+.bg-blue-600 {
+  background-color: #2980b9;
+}
+
+.text-white {
+  color: white;
+}
+
+.text-gray-600 {
+  color: #7f8c8d;
+}
+
+.border-gray-300 {
+  border-color: #dcdfe1;
+}
+
+.rounded-md {
+  border-radius: 8px;
+}
+
+.focus\:ring-2 {
+  outline: 2px solid #3498db;
+}
+/* Spinner Styles */
+.spinner {
+  border: 4px solid #f3f3f3; /* Light gray */
+  border-top: 4px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

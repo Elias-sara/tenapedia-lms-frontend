@@ -1,0 +1,35 @@
+/* Sidebar styles */
+.sidebar {
+  transition: width 0.3s ease-in-out; /* Smooth transition for width change */
+  overflow: hidden; /* Prevents content from spilling out */
+  width: 256px; /* Full width when expanded */
+}
+
+/* Collapsed Sidebar */
+.sidebar.collapsed {
+  width: 48px; /* Width when collapsed */
+}
+
+/* Expanded Sidebar */
+.sidebar.expanded {
+  width: 256px; /* Width when expanded */
+}
+
+/* Optional: If you want to animate logo visibility */
+.sidebar .logo {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar.collapsed .logo {
+  opacity: 0; /* Hide the logo in collapsed state */
+}
+
+/* Optional: If you want to animate text */
+.sidebar .menu-item {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar.collapsed .menu-item {
+  opacity: 0; /* Hide text when collapsed */
+}

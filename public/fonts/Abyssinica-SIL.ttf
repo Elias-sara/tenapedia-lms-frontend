@@ -1,0 +1,16 @@
+<head>
+  {/* Google Fonts Link */}
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossOrigin="anonymous"  {/* Corrected */}
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abyssinica+SIL&display=swap"
+    rel="stylesheet"
+  />
+</head>

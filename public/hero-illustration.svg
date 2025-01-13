@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <title>Hero Illustration</title>
+  <rect width="100%" height="100%" fill="#f0f0f0"/>
+  <circle cx="200" cy="150" r="100" fill="#1a80b6" opacity="0.5"/>
+  <text x="50%" y="50%" text-anchor="middle" font-size="24" fill="#333">
+    Hero Illustration
+  </text>
+</svg>

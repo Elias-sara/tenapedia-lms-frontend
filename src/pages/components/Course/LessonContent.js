@@ -1,37 +1,69 @@
 // components/Course/LessonContent.js
-const LessonContent = ({ lesson }) => (
-  <div>
-    <h3 className="text-xl font-bold">{lesson.title}</h3>
-    <p className="text-gray-600">{lesson.content}</p>
-    {lesson.videoUrl && (
-      <div className="mt-4">
-        <video
-          controls
-          className="w-full rounded"
-          src={lesson.videoUrl}
-        ></video>
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const LessonContent = ({ lesson = {} }) => {
+  const {
+    title = 'Untitled Lesson',
+    content = 'No content available',
+    videoUrl = null,
+    resources = []
+  } = lesson;
+
+  return (
+    <div className="lesson-content">
+      <h2>{title}</h2>
+      <div className="lesson-description">
+        <p>{content}</p>
       </div>
-    )}
-    {lesson.resources?.length > 0 && (
-      <div className="mt-4">
-        <h4 className="font-bold">Resources:</h4>
-        <ul className="list-disc list-inside">
-          {lesson.resources.map((resource, index) => (
-            <li key={`${resource}-${index}`}>
-              <a
-                href={resource}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                Resource {index + 1}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-  </div>
-);
+
+      {videoUrl && (
+        <div className="lesson-video">
+          <iframe 
+            src={videoUrl} 
+            title={title} 
+            width="100%" 
+            height="400px" 
+            allowFullScreen 
+          />
+        </div>
+      )}
+
+      {resources.length > 0 && (
+        <div className="lesson-resources">
+          <h3>Additional Resources</h3>
+          <ul>
+            {resources.map((resource, index) => (
+              <li key={resource.id || index}>
+                <a 
+                  href={resource.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  {resource.name || `Resource ${index + 1}`}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
+LessonContent.propTypes = {
+  lesson: PropTypes.shape({
+    title: PropTypes.string,
+    content: PropTypes.string,
+    videoUrl: PropTypes.string,
+    resources: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        name: PropTypes.string,
+        url: PropTypes.string
+      })
+    )
+  })
+};
 
 export default LessonContent;

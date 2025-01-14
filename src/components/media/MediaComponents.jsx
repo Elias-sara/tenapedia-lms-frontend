@@ -2,60 +2,87 @@ import React from 'react';
 import { Box, Typography, Avatar } from '@mui/material';
 import { getMediaUrl, getVideoEmbedUrl, isExternalVideo } from '../../utils/mediaUtils';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const BACKEND_URL = process.env.NEXT_PUBLIC_UPLOAD_URL || process.env.NEXT_PUBLIC_API_URL;
 
-export const CourseImage = ({ src, alt, sx = {}, ...props }) => (
-  <Box
-    component="img"
-    src={src ? `${BACKEND_URL}/${src.replace(/^\//, '')}` : '/images/placeholders/course.jpg'}
-    alt={alt}
-    sx={{
-      width: '100%',
-      height: 200,
-      objectFit: 'cover',
-      borderRadius: 1,
-      ...sx
-    }}
-    onError={(e) => {
-      e.target.onerror = null;
-      e.target.src = '/images/placeholders/course.jpg';
-    }}
-    {...props}
-  />
-);
+export const CourseImage = ({ src, alt, sx = {}, ...props }) => {
+  // Ensure src is a full URL or path
+  const imageSrc = src 
+    ? (src.startsWith('http') 
+        ? src 
+        : `${BACKEND_URL}/${src.replace(/^\//, '')}`)
+    : '/images/placeholders/course.jpg';
 
-export const InstructorAvatar = ({ src, alt, sx = {}, ...props }) => (
-  <Avatar
-    src={src ? `${BACKEND_URL}/${src.replace(/^\//, '')}` : '/images/placeholders/instructor.jpg'}
-    alt={alt}
-    sx={{
-      width: 40,
-      height: 40,
-      ...sx
-    }}
-    {...props}
-  />
-);
+  return (
+    <Box
+      component="img"
+      src={imageSrc}
+      alt={alt || 'Course Image'}
+      sx={{
+        width: '100%',
+        height: 200,
+        objectFit: 'cover',
+        borderRadius: 1,
+        ...sx
+      }}
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = '/images/placeholders/course.jpg';
+      }}
+      {...props}
+    />
+  );
+};
 
-export const LessonImage = ({ src, alt, sx = {}, ...props }) => (
-  <Box
-    component="img"
-    src={src ? `${BACKEND_URL}/${src.replace(/^\//, '')}` : '/images/placeholders/lesson.jpg'}
-    alt={alt}
-    sx={{
-      width: '100%',
-      maxHeight: 300,
-      objectFit: 'cover',
-      borderRadius: 1,
-      ...sx
-    }}
-    onError={(e) => {
-      e.target.onerror = null;
-      e.target.src = '/images/placeholders/lesson.jpg';
-    }}
-    {...props}
-  />
-);
+export const InstructorAvatar = ({ src, alt, sx = {}, ...props }) => {
+  // Ensure src is a full URL or path
+  const imageSrc = src 
+    ? (src.startsWith('http') 
+        ? src 
+        : `${BACKEND_URL}/${src.replace(/^\//, '')}`)
+    : '/images/placeholders/instructor.jpg';
+
+  return (
+    <Avatar
+      src={imageSrc}
+      alt={alt || 'Instructor Avatar'}
+      sx={{
+        width: 40,
+        height: 40,
+        ...sx
+      }}
+      {...props}
+    />
+  );
+};
+
+export const LessonImage = ({ src, alt, sx = {}, ...props }) => {
+  // Ensure src is a full URL or path
+  const imageSrc = src 
+    ? (src.startsWith('http') 
+        ? src 
+        : `${BACKEND_URL}/${src.replace(/^\//, '')}`)
+    : '/images/placeholders/lesson.jpg';
+
+  return (
+    <Box
+      component="img"
+      src={imageSrc}
+      alt={alt || 'Lesson Image'}
+      sx={{
+        width: '100%',
+        maxHeight: 300,
+        objectFit: 'cover',
+        borderRadius: 1,
+        ...sx
+      }}
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = '/images/placeholders/lesson.jpg';
+      }}
+      {...props}
+    />
+  );
+};
 
 export const VideoPlayer = ({ url, title, sx = {}, ...props }) => {
   if (!url) return null;

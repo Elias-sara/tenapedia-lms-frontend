@@ -26,6 +26,8 @@ const isValidImageUrl = (url) => {
   }
 };
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const CourseDetails = () => {
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,12 +49,10 @@ const CourseDetails = () => {
   const fetchCourseDetails = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(
-        `http://localhost:5000/api/courses/${courseId}/content`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const courseContentUrl = `${API_URL}/api/courses/${courseId}/content`;
+      const response = await axios.get(courseContentUrl, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setCourse(response.data);
     } catch (error) {
       console.error("Error fetching course:", error);
@@ -65,12 +65,10 @@ const CourseDetails = () => {
   const checkEnrollmentStatus = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(
-        `http://localhost:5000/api/students/courses`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const studentCoursesUrl = `${API_URL}/api/students/courses`;
+      const response = await axios.get(studentCoursesUrl, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       const enrolledCourses = response.data || [];
       setIsEnrolled(enrolledCourses.some(course => course._id === courseId));
     } catch (error) {
@@ -82,11 +80,8 @@ const CourseDetails = () => {
   const handleEnroll = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.post(
-        `http://localhost:5000/api/students/enroll/${courseId}`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const enrollCourseUrl = `${API_URL}/api/students/enroll/${courseId}`;
+      await axios.post(enrollCourseUrl, {}, { headers: { Authorization: `Bearer ${token}` } });
       toast.success("Successfully enrolled!");
       setIsEnrolled(true);
     } catch (error) {

@@ -1,6 +1,4 @@
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../auth/[...nextauth]';
-import axiosInstance from '../../../utils/axiosConfig';
+import axios from '@/utils/axiosInstance';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -8,15 +6,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    const session = await getServerSession(req, res, authOptions);
-    if (!session) {
-      return res.status(401).json({ message: 'Unauthorized' });
+    const token = req.headers.authorization?.split(' ')[1];
+    
+    if (!token) {
+      return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    const response = await axiosInstance.get('/api/courses/available', {
-      headers: {
-        Authorization: `Bearer ${session.accessToken}`
-      }
+    const response = await axios.get('/api/courses/available', {
+      headers: { Authorization: `Bearer ${token}` }
     });
 
     return res.status(200).json(response.data);
@@ -27,4 +24,4 @@ export default async function handler(req, res) {
       error: error.message 
     });
   }
-} 
+}

@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
 import { Inter } from 'next/font/google';
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 import "../app/globals.css"; 
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ 
   subsets: ['latin'], 
@@ -31,7 +31,7 @@ const defaultMetadata = {
   themeColor: "#1a80b6"
 };
 
-export default function RootLayout({ children, pageMetadata }) {
+export default function RootLayout({ children, pageMetadata = {} }) {
   const metadata = { ...defaultMetadata, ...pageMetadata };
 
   return (
@@ -74,7 +74,11 @@ export default function RootLayout({ children, pageMetadata }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
       </head>
       <body
-        className={`${inter.variable} min-h-screen w-full overflow-x-hidden`}
+        className={cn(
+          "min-h-screen w-full overflow-x-hidden",
+          inter.variable
+        )}
+        suppressHydrationWarning={true}
       >
         <a 
           href="#main-content" 

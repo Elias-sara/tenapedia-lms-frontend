@@ -1,49 +1,34 @@
-// import React, { useEffect } from 'react';
-// import { useAuth } from '../context/AuthContext'; // Correct import for useAuth hook
-// import { useRouter } from 'next/router';
-
-// const ProtectedRoute = ({ children }) => {
-//   const { authData, loading } = useAuth(); // Access both authData and loading from context
-//   const router = useRouter();
-
-//   useEffect(() => {
-//     if (!authData?.token) {
-//       router.push('/login'); // Redirect to login if token is missing
-//     }
-//   }, [authData, router]);
-
-//   if (loading) {
-//     return <div>Loading...</div>; // Show a loading spinner if data is loading
-//   }
-
-//   if (!authData?.token) {
-//     return <div>You need to log in first!</div>; // If no token, show this message
-//   }
-
-//   return children; // Render children if user is authenticated
-// };
-
-// export default ProtectedRoute;
 import React, { useContext, useEffect } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+import { AuthContext } from "../../context/AuthContext";
 
 // ProtectedRoute component that restricts access to authenticated users
 const ProtectedRoute = ({ children }) => {
-  const { authData } = useContext(AuthContext);
   const router = useRouter();
+  const { user, loading } = useContext(AuthContext) || { user: null, loading: true };
 
   useEffect(() => {
-    if (!authData.token) {
-      router.push("/login"); // Redirect to login page if no token is found
+    if (!loading) {
+      if (!user) {
+        router.push("/login"); // Redirect to login page if no token is found
+      }
     }
-  }, [authData, router]);
+  }, [user, loading, router]);
 
-  if (!authData.token) {
+  if (loading) {
     return <div>Loading...</div>; // Loading state while checking authentication
   }
 
+  if (!user) {
+    return null;
+  }
+
   return children; // Render protected content if authenticated
+};
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node
 };
 
 export default ProtectedRoute;

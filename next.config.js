@@ -1,21 +1,32 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-    NEXT_PUBLIC_UPLOAD_URL: process.env.NEXT_PUBLIC_UPLOAD_URL,
-    NEXT_PUBLIC_STUDENT_API_URL: process.env.NEXT_PUBLIC_STUDENT_API_URL,
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['localhost', 'tenapedia-lms-backend-1.onrender.com'],
+    domains: [
+      'tenapedia-lms-backend-1.onrender.com', 
+      'localhost'
+    ],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'tenapedia-lms-backend-1.onrender.com',
         pathname: '/uploads/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        pathname: '/uploads/**',
+      }
     ],
+  },
+  webpack: (config, { isServer }) => {
+    config.resolve.fallback = { fs: false, net: false, tls: false };
+    return config;
   },
 }
 
-module.exports = nextConfig;
+module.exports = nextConfig

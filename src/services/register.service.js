@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = process.env.NEXT_PUBLIC_API_URL + "/api/auth";
 
 const register = async ({
   firstName,

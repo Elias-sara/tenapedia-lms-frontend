@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const fetchCourses = async () => {
   try {
     const response = await fetch('/api/courses');
@@ -29,3 +31,14 @@ export const saveCourse = async (courseData) => {
     console.error('Error:', error);
   }
 };
+
+const AdminUtilsAPIPage = () => {
+  return (
+    <div>
+      <h1>Admin Utilities API</h1>
+      <p>API utility functions for course management</p>
+    </div>
+  );
+};
+
+export default AdminUtilsAPIPage;

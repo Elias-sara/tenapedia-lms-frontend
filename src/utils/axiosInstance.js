@@ -1,11 +1,17 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000',
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    timeout: 10000 // 10 seconds timeout
 });
+
+// Fallback mechanism
+if (!axiosInstance.defaults.baseURL) {
+    console.warn('No API URL configured. Please set NEXT_PUBLIC_API_URL in .env');
+}
 
 // Check if we're running on the client-side
 const isClient = typeof window !== 'undefined';
@@ -13,10 +19,10 @@ const isClient = typeof window !== 'undefined';
 // Request interceptor for adding auth token
 axiosInstance.interceptors.request.use(
     (config) => {
-        console.log('Axios Request Config:', {
+        console.log('Axios Request:', {
             url: config.url,
-            method: config.method,
-            baseURL: config.baseURL
+            baseURL: config.baseURL,
+            method: config.method
         });
 
         // Only attempt to get token on client-side
@@ -39,9 +45,7 @@ axiosInstance.interceptors.request.use(
 
         return config;
     },
-    (error) => {
-        return Promise.reject(error);
-    }
+    (error) => Promise.reject(error)
 );
 
 // Response interceptor for handling errors
@@ -54,14 +58,18 @@ axiosInstance.interceptors.response.use(
         return response;
     },
     (error) => {
-        console.error('Axios Interceptor Error:', {
-            status: error.response?.status,
-            message: error.response?.data?.message || error.message,
-            url: error.config?.url,
-            method: error.config?.method,
-            fullError: error
+        console.error('Axios Error:', {
+            message: error.message,
+            code: error.code,
+            url: error.config?.url
         });
-
+        
+        // Provide a more informative error
+        if (error.code === 'ERR_NETWORK') {
+            console.warn(`Network Error: Unable to connect to ${error.config?.baseURL}. 
+                          Please check your backend server and network connection.`);
+        }
+        
         if (error.response) {
             // Handle specific error cases
             switch (error.response.status) {
